@@ -31,7 +31,8 @@ namespace Client
             try
             {
                 server = new RemoteServer(serverIP, serverPort);
-                server.GetPortEvent += SetNewPort;
+                server.GetPortEvent += SetNewPort;//绑定回调事件
+                MessageBox.Show("连接成功，请获取转发端口", "成功");
             }
             catch (Exception ex)
             {
@@ -61,11 +62,14 @@ namespace Client
             }
             else
             {
+                UdpForwardClient udpForwardClient = new UdpForwardClient(ip, port);
                 this.tbxProxyAddress.Text = ip + ":"+ port.ToString();
             }
-            //TODO 严重bug
-            //this.tbxProxyAddress.Text = ip + ":"+ port.ToString();
-            //MessageBox.Show(ip + ":" + port.ToString());
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(0);
         }
     }
 }

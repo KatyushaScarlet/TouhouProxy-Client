@@ -5,18 +5,15 @@ namespace Client
 {
     public class Model
     {
-        public const string Client_Arrive_Haneshake = "Client_Arrive_Handshake";
-        public const string Client_Second_Handshake = "Client_Second_Handshake";
-        public const string Client_Change_Port = "Client_Change_Port";
-        public const string Client_Heartbeat = "Client_Heartbeat";
+        public const string Client_Arrive_Handshake = "CAH";
+        public const string Server_Proxy_Start = "SPS";
 
-        public const string Server_New_Port = "Server_New_Port";
-        public const string Server_Proxy_Start = "Server_Proxy_Start";
+        public static byte[] Client_Heart_Beat = { 0, 0, 0, 0, 0 };
 
         public static byte[] Encode(params object[] args)
         {
             string output = "";
-            for (int i = 0; i < args.Count(); i++)
+            for (int i = 0; i < args.Length; i++)
             {
                 output += args[i].ToString() + "|";
             }

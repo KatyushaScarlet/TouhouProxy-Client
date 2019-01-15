@@ -52,7 +52,7 @@ namespace Client
 
         public void GetNewPort()
         {
-            byte[] messageSend = Model.Encode(Model.Client_Arrive_Haneshake);
+            byte[] messageSend = Model.Encode(Model.Client_Arrive_Handshake);
             SendMessage(messageSend);
             //获取新端口
         }
@@ -80,7 +80,7 @@ namespace Client
                     //传回分配的端口
                     int remotePort = Convert.ToInt32(messageArrive[1]);
 
-                    //TODO 炸了 严重bug
+                    //回传端口号
                     if (GetPortEvent!=null)
                     {
                         GetPortEvent(serverIP, remotePort);
@@ -104,10 +104,5 @@ namespace Client
                 Console.WriteLine(ex.Message);
             }
         }
-
-        //public void close()
-        //{
-        //    client.Close();
-        //}
     }
 }
