@@ -30,20 +30,19 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbxServerIP = new System.Windows.Forms.TextBox();
             this.tbxServerPort = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbxLocalPort = new System.Windows.Forms.TextBox();
             this.tbxProxyAddress = new System.Windows.Forms.TextBox();
+            this.cbxServerIP = new System.Windows.Forms.ComboBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 24);
+            this.label1.Location = new System.Drawing.Point(16, 48);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 0;
@@ -52,23 +51,15 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 56);
+            this.label2.Location = new System.Drawing.Point(16, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 1;
             this.label2.Text = "服务器端口";
             // 
-            // tbxServerIP
-            // 
-            this.tbxServerIP.Location = new System.Drawing.Point(104, 16);
-            this.tbxServerIP.Name = "tbxServerIP";
-            this.tbxServerIP.Size = new System.Drawing.Size(128, 21);
-            this.tbxServerIP.TabIndex = 2;
-            this.tbxServerIP.Text = "127.0.0.1";
-            // 
             // tbxServerPort
             // 
-            this.tbxServerPort.Location = new System.Drawing.Point(104, 48);
+            this.tbxServerPort.Location = new System.Drawing.Point(96, 72);
             this.tbxServerPort.Name = "tbxServerPort";
             this.tbxServerPort.Size = new System.Drawing.Size(128, 21);
             this.tbxServerPort.TabIndex = 3;
@@ -77,7 +68,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 120);
+            this.label3.Location = new System.Drawing.Point(16, 112);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 4;
@@ -85,7 +76,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(24, 160);
+            this.button1.Location = new System.Drawing.Point(16, 144);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 40);
             this.button1.TabIndex = 5;
@@ -95,7 +86,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(144, 160);
+            this.button2.Location = new System.Drawing.Point(136, 144);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(88, 40);
             this.button2.TabIndex = 6;
@@ -103,49 +94,50 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 88);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 12);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "本地转发端口";
-            // 
-            // tbxLocalPort
-            // 
-            this.tbxLocalPort.Location = new System.Drawing.Point(104, 80);
-            this.tbxLocalPort.Name = "tbxLocalPort";
-            this.tbxLocalPort.Size = new System.Drawing.Size(128, 21);
-            this.tbxLocalPort.TabIndex = 8;
-            this.tbxLocalPort.Text = "10800";
-            // 
             // tbxProxyAddress
             // 
-            this.tbxProxyAddress.Location = new System.Drawing.Point(104, 112);
+            this.tbxProxyAddress.Location = new System.Drawing.Point(96, 104);
             this.tbxProxyAddress.Name = "tbxProxyAddress";
             this.tbxProxyAddress.Size = new System.Drawing.Size(128, 21);
             this.tbxProxyAddress.TabIndex = 9;
+            // 
+            // cbxServerIP
+            // 
+            this.cbxServerIP.FormattingEnabled = true;
+            this.cbxServerIP.Location = new System.Drawing.Point(96, 40);
+            this.cbxServerIP.Name = "cbxServerIP";
+            this.cbxServerIP.Size = new System.Drawing.Size(128, 20);
+            this.cbxServerIP.TabIndex = 10;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.LinkColor = System.Drawing.Color.Red;
+            this.linkLabel1.Location = new System.Drawing.Point(40, 16);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(161, 12);
+            this.linkLabel1.TabIndex = 12;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Touhou Porxy 早期版本 v0.1";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(256, 215);
+            this.ClientSize = new System.Drawing.Size(241, 195);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.cbxServerIP);
             this.Controls.Add(this.tbxProxyAddress);
-            this.Controls.Add(this.tbxLocalPort);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbxServerPort);
-            this.Controls.Add(this.tbxServerIP);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "TouhouProxy";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -156,14 +148,13 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbxServerIP;
         private System.Windows.Forms.TextBox tbxServerPort;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tbxLocalPort;
         private System.Windows.Forms.TextBox tbxProxyAddress;
+        private System.Windows.Forms.ComboBox cbxServerIP;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

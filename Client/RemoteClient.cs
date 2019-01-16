@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+using System.Windows.Forms;
 
 namespace Client
 {
@@ -71,7 +72,10 @@ namespace Client
                 }
 
                 //TODO 服务端断开事件
-                if (bytesRead == 0) ;
+                if (bytesRead == 0)
+                {
+                    throw new Exception("已断开连接");
+                }
 
                 string[] messageArrive = Model.Decode(bytesRead, buffer);
                 Array.Clear(buffer, 0, buffer.Length);      // 清空缓存，避免脏读
@@ -90,8 +94,7 @@ namespace Client
                     //销毁转发（如果存在）
                     if (udpForwardClient != null)
                     {
-                        //udpForwardClient.Close();
-                        udpForwardClient = null;
+                        removeForward();
                     }
                     //开始转发
                     udpForwardClient = new UdpForwardClient(serverIP, remotePort);
@@ -111,8 +114,13 @@ namespace Client
                     streamToServer.Dispose();
                 client.Close();
 
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message.ToString(), "错误");
             }
+        }
+        public void removeForward()//销毁转发
+        {
+            udpForwardClient.Close();
+            udpForwardClient = null;
         }
     }
 }

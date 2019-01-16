@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Client
 {
@@ -11,6 +12,9 @@ namespace Client
         {
             InitializeComponent();
 
+            cbxServerIP.Items.Add("118.25.48.106");
+            cbxServerIP.Items.Add("127.0.0.1");
+            cbxServerIP.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -20,11 +24,12 @@ namespace Client
             //tbxServerPort.Enabled = false;
             //tbxLocalPort.Enabled = false;
 
-            string serverIP = tbxServerIP.Text;
+            string serverIP = cbxServerIP.SelectedItem.ToString();
             int serverPort = Convert.ToInt32(Convert.ToInt32(tbxServerPort.Text));
 
             if (server!=null)
             {
+                server.removeForward();
                 server = null;
             }
 
@@ -33,6 +38,8 @@ namespace Client
                 server = new RemoteClient(serverIP, serverPort);
                 server.GetPortEvent += SetNewPort;//绑定回调事件
                 MessageBox.Show("连接成功，请获取转发端口", "成功");
+
+                tbxProxyAddress.Text = "";
             }
             catch (Exception ex)
             {
@@ -69,6 +76,11 @@ namespace Client
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             System.Environment.Exit(0);
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://touhou.su/touhou-proxy");
         }
     }
 }
