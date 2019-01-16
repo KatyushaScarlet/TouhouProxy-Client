@@ -78,19 +78,19 @@
             // 
             this.button1.Location = new System.Drawing.Point(16, 144);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 40);
+            this.button1.Size = new System.Drawing.Size(96, 40);
             this.button1.TabIndex = 5;
-            this.button1.Text = "连接服务器";
+            this.button1.Text = "①连接服务器";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(136, 144);
+            this.button2.Location = new System.Drawing.Point(128, 144);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 40);
+            this.button2.Size = new System.Drawing.Size(96, 40);
             this.button2.TabIndex = 6;
-            this.button2.Text = "获取端口";
+            this.button2.Text = "②获取端口";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -138,6 +138,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
+            this.Text = "TouhouProxy";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

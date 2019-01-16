@@ -115,12 +115,16 @@ namespace Client
                 client.Close();
 
                 MessageBox.Show(ex.Message.ToString(), "错误");
+                removeForward();
             }
         }
         public void removeForward()//销毁转发
         {
-            udpForwardClient.Close();
-            udpForwardClient = null;
+            if (udpForwardClient!=null)
+            {
+                udpForwardClient.Close();
+                udpForwardClient = null;
+            }
         }
     }
 }

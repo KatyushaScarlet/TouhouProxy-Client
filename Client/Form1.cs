@@ -37,27 +37,39 @@ namespace Client
             {
                 server = new RemoteClient(serverIP, serverPort);
                 server.GetPortEvent += SetNewPort;//绑定回调事件
-                MessageBox.Show("连接成功，请获取转发端口", "成功");
+                MessageBox.Show("连接成功，请点击获取端口", "成功");
 
                 tbxProxyAddress.Text = "";
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message,"错误");
+                server = null;
+                tbxProxyAddress.Text = "";
             }
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (server!=null)
+            try
             {
-                server.GetNewPort();
+                if (server != null)
+                {
+                    server.GetNewPort();
+                }
+                else
+                {
+                    MessageBox.Show("未连接到服务器");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("未连接到服务器");
+                MessageBox.Show(ex.Message, "错误");
+                server = null;
+                tbxProxyAddress.Text = "";
             }
+
         }
 
         private void SetNewPort(string ip,int port)
