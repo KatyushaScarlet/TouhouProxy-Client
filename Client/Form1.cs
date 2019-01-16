@@ -92,7 +92,7 @@ namespace Client
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://katyusha.net/touhou-proxy");
+            Process.Start("https://katyusha.net");
         }
 
         private void tbxProxyAddress_DoubleClick(object sender, EventArgs e)
