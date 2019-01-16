@@ -18,17 +18,9 @@ namespace Client
 
         public RemoteClient(string serverIP,int serverPort)
         {
-            //try
-            //{
-                client = new TcpClient();
-                client.Connect(serverIP, serverPort);      // 与服务器连接
-                this.serverIP = serverIP;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //    return;
-            //}
+            client = new TcpClient();
+            client.Connect(serverIP, serverPort);
+            this.serverIP = serverIP;
             buffer = new byte[BufferSize];
 
             streamToServer = client.GetStream();
@@ -36,14 +28,8 @@ namespace Client
 
         private void SendMessage(byte[] messageSend)
         {
-            //try
-            //{
-                streamToServer.Write(messageSend, 0, messageSend.Length); // 发往服务器
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
+
+            streamToServer.Write(messageSend, 0, messageSend.Length);
 
             lock (streamToServer)
             {
@@ -59,7 +45,7 @@ namespace Client
             //获取新端口
         }
 
-        // 读取完成时的回调方法
+        //读取完成时的回调方法
         private void ReadComplete(IAsyncResult ar)
         {
             int bytesRead;
@@ -78,7 +64,7 @@ namespace Client
                 }
 
                 string[] messageArrive = Model.Decode(bytesRead, buffer);
-                Array.Clear(buffer, 0, buffer.Length);      // 清空缓存，避免脏读
+                Array.Clear(buffer, 0, buffer.Length);// 清空缓存，避免脏读
 
                 if (messageArrive[0] == Model.Server_Proxy_Start)
                 {

@@ -100,6 +100,7 @@
             this.tbxProxyAddress.Name = "tbxProxyAddress";
             this.tbxProxyAddress.Size = new System.Drawing.Size(128, 21);
             this.tbxProxyAddress.TabIndex = 9;
+            this.tbxProxyAddress.DoubleClick += new System.EventHandler(this.tbxProxyAddress_DoubleClick);
             // 
             // cbxServerIP
             // 

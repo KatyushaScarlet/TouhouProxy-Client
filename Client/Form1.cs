@@ -92,7 +92,16 @@ namespace Client
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://touhou.su/touhou-proxy");
+            Process.Start("https://katyusha.net/touhou-proxy");
+        }
+
+        private void tbxProxyAddress_DoubleClick(object sender, EventArgs e)
+        {
+            if (tbxProxyAddress.Text!="")
+            {
+                Clipboard.SetText(tbxProxyAddress.Text);
+                MessageBox.Show("复制成功！", "成功");
+            }
         }
     }
 }
