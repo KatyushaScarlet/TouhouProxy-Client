@@ -7,8 +7,7 @@ namespace Client
     {
         public const string Client_Arrive_Handshake = "CAH";
         public const string Server_Proxy_Start = "SPS";
-
-        public static byte[] Client_Heart_Beat = { 0, 0, 0, 0, 0 };
+        public static byte[] Heart_Beat = { 0x0E, 0x03, 0xE4, 0x00, 0x00, 0x00, 0x03, 0x01, 0x00, 0x00 };
 
         public static byte[] Encode(params object[] args)
         {

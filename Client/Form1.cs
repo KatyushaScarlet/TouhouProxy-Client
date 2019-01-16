@@ -5,7 +5,7 @@ namespace Client
 {
     public partial class Form1 : Form
     {
-        RemoteServer server = null;
+        RemoteClient server = null;
 
         public Form1()
         {
@@ -30,7 +30,7 @@ namespace Client
 
             try
             {
-                server = new RemoteServer(serverIP, serverPort);
+                server = new RemoteClient(serverIP, serverPort);
                 server.GetPortEvent += SetNewPort;//绑定回调事件
                 MessageBox.Show("连接成功，请获取转发端口", "成功");
             }
@@ -57,12 +57,11 @@ namespace Client
         {
             if (tbxProxyAddress.InvokeRequired)
             {
-                RemoteServer.GetPortEventHandler getPortEventHandler = new RemoteServer.GetPortEventHandler(SetNewPort);
+                RemoteClient.GetPortEventHandler getPortEventHandler = new RemoteClient.GetPortEventHandler(SetNewPort);
                 tbxProxyAddress.Invoke(getPortEventHandler, new object[] { ip, port });
             }
             else
             {
-                UdpForwardClient udpForwardClient = new UdpForwardClient(ip, port);
                 this.tbxProxyAddress.Text = ip + ":"+ port.ToString();
             }
         }

@@ -3,7 +3,7 @@ using System.Net.Sockets;
 
 namespace Client
 {
-    public class RemoteServer
+    public class RemoteClient
     {
         public delegate void GetPortEventHandler(string ip, int port);
         public event GetPortEventHandler GetPortEvent;
@@ -12,9 +12,10 @@ namespace Client
         private byte[] buffer;
         private TcpClient client;
         private NetworkStream streamToServer;
+        UdpForwardClient udpForwardClient = null;
         private string serverIP = "";
 
-        public RemoteServer(string serverIP,int serverPort)
+        public RemoteClient(string serverIP,int serverPort)
         {
             //try
             //{
@@ -86,7 +87,16 @@ namespace Client
                         GetPortEvent(serverIP, remotePort);
                     }
 
-                    //TODO 发送UDP心跳包
+                    //销毁转发（如果存在）
+                    if (udpForwardClient != null)
+                    {
+                        //udpForwardClient.Close();
+                        udpForwardClient = null;
+                    }
+                    //开始转发
+                    udpForwardClient = new UdpForwardClient(serverIP, remotePort);
+
+                    //TODO 其他处理
                 }
 
                 lock (streamToServer)
