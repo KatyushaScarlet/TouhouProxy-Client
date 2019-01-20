@@ -20,8 +20,8 @@ namespace Client
         {
             IPEndPoint server = new IPEndPoint(IPAddress.Parse(ip), port);
             udpClient = new UdpClient(0);
-            //解决UDP报错问题，详见 https://www.cnblogs.com/liuslayer/p/7867239.html
-            //在linux上不支持，暂时无解
+            //解决UDP报错问题，详见 https://www.cnblogs.com/pasoraku/p/5612105.html
+            //在linux上无此问题
             uint IOC_IN = 0x80000000;
             uint IOC_VENDOR = 0x18000000;
             uint SIO_UDP_CONNRESET = IOC_IN | IOC_VENDOR | 12;
