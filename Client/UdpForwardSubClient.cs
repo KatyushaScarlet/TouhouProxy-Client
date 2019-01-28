@@ -12,9 +12,11 @@ namespace Client
 
         private UdpClient udpClient = null;
         private IPEndPoint localEndpoint = null;
-        private int index = -1;
-        private int localPort = 10800;
 
+        private int Index = -1;
+        public int index { get => index; }
+
+        private int localPort = 10800;
         private bool flagClose = false;
 
         public UdpForwardSubClient(int index)
@@ -27,7 +29,7 @@ namespace Client
             uint SIO_UDP_CONNRESET = IOC_IN | IOC_VENDOR | 12;
             udpClient.Client.IOControl((int)SIO_UDP_CONNRESET, new byte[] { Convert.ToByte(false) }, null);
             //
-            this.index = index;
+            Index = index;
             localEndpoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), localPort);
 
             udpClient.BeginReceive(new AsyncCallback(ReadComplete), null);
@@ -45,10 +47,10 @@ namespace Client
             //TODO 
             if (buffer.Length > 0)
             {
-                //回传数据
+                //回传数据（带上index）
                 if (ReceiveMessageFromUdpClientEvent!=null)
                 {
-                    ReceiveMessageFromUdpClientEvent(index, buffer);
+                    ReceiveMessageFromUdpClientEvent(Index, buffer);
                 }
             }
 

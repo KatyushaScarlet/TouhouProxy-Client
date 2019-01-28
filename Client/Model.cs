@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System;
 using System.Text;
 
 namespace Client
@@ -36,6 +36,17 @@ namespace Client
                 if (b1[i] != b2[i])
                     return false;
             return true;
+        }
+
+        public static string GetDatetime()
+        {
+            return DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
+        }
+
+        public static int GetRandomNumber(int min, int max)//获取随机数（保证随机）
+        {
+            Random random = new Random(Guid.NewGuid().ToString("N").GetHashCode());
+            return random.Next(min, max);
         }
 
         //static string GetIP()//获取本机IP

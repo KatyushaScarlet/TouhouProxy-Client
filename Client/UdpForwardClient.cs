@@ -8,15 +8,14 @@ namespace Client
 {
     class UdpForwardClient
     {
-        private string serverIP = "";
-        private int serverPort = 0;
-        private int localPort = 10800;
+        //private string serverIP = "";
+        //private int serverPort = 0;
 
         private UdpClient mainUdpClient = null;
         private IPEndPoint serverEndPoint = null;
         Thread heartBeat = null;
-        //<编号，分配的UDP对象>
-        private Dictionary<int, UdpClient> clientList = null;
+        //<编号，转发对象>
+        private Dictionary<int, UdpForwardSubClient> clientList = new Dictionary<int, UdpForwardSubClient>();
 
         private bool flagClose = false;
 
@@ -31,9 +30,9 @@ namespace Client
             uint SIO_UDP_CONNRESET = IOC_IN | IOC_VENDOR | 12;
             mainUdpClient.Client.IOControl((int)SIO_UDP_CONNRESET, new byte[] { Convert.ToByte(false) }, null);
             //
-            this.serverEndPoint = server;
-            this.serverIP = ip;
-            this.serverPort = port;
+            serverEndPoint = server;
+            //serverIP = ip;
+            //serverPort = port;
             //发送心跳
             heartBeat = new Thread(HeartBeat);
             heartBeat.Start();
@@ -56,14 +55,34 @@ namespace Client
             }
 
             IPEndPoint newEndPoint = null;
-            byte[] buffer = mainUdpClient.EndReceive(ar, ref newEndPoint);
+            byte[] buffer = mainUdpClient.EndReceive(ar, ref newEndPoint);//原始数据
 
             if (buffer.Length > 0)
             {
-
-
+                string[] messageArrive = Model.Decode(buffer.Length, buffer);//解码数据
                 //TODO 重写
+                if (newEndPoint.Equals(serverEndPoint) && messageArrive[0] == Model.Game_Data_Forward)//如果来自服务端，并且数据包头符合
+                {
+                    //获取到达用户的id
+                    int index = int.Parse(messageArrive[1]);
+                    byte[] message = Model.Encode(messageArrive[2]);
 
+                    if (clientList.ContainsKey(index))
+                    {
+                        //如果转发已经建立，则调用已创建的UdpClient进行转发
+                        clientList[index].SendMessage(message);
+                    }
+                    else
+                    {
+                        //如果转发没有建立，则新建一个
+                        UdpForwardSubClient subClient = new UdpForwardSubClient(index);
+                        //绑定回调事件
+                        subClient.ReceiveMessageFromUdpClientEvent += ReceiveMessag;
+
+                        clientList.Add(index, subClient);
+                        subClient.SendMessage(message);
+                    }
+                }
                 //if (newEndPoint.Equals(serverEndPoint))
                 //{
                 //    mainUdpClient.Send(buffer, buffer.Length, new IPEndPoint(IPAddress.Parse("127.0.0.1"), localPort));
@@ -79,12 +98,13 @@ namespace Client
 
         private void ReceiveMessag(int index, byte[] buffer)
         {
-            //接收本地UdpClient的回传数据
-
+            //接收本地UdpClient的回传数据，并转发至服务端
+            byte[] message = Model.Encode(Model.Game_Data_Forward, index, buffer);
+            mainUdpClient.Send(message, message.Length, serverEndPoint);
 
         }
 
-        private void HeartBeat()
+        private void HeartBeat()//心跳
         {
             while (true)
             {
@@ -98,9 +118,9 @@ namespace Client
             }
         }
 
-        public void Close()//结束心跳
+        public void Close()
         {
-            heartBeat.Abort();
+            heartBeat.Abort();//结束心跳
             flagClose = true;
         }
     }
