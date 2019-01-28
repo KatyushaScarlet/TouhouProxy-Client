@@ -6,6 +6,7 @@ namespace Client
 {
     public class RemoteClient
     {
+        //端口回传
         public delegate void GetPortEventHandler(string ip, int port);
         public event GetPortEventHandler GetPortEvent;
 
@@ -15,8 +16,9 @@ namespace Client
         private NetworkStream streamToServer;
         UdpForwardClient udpForwardClient = null;
         private string serverIP = "";
+        private int serverPort = 20000;
 
-        public RemoteClient(string serverIP,int serverPort)
+        public RemoteClient(string serverIP)
         {
             client = new TcpClient();
             client.Connect(serverIP, serverPort);

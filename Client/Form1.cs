@@ -15,6 +15,7 @@ namespace Client
             cbxServerIP.Items.Add("118.25.48.106");
             cbxServerIP.Items.Add("127.0.0.1");
             cbxServerIP.SelectedIndex = 0;
+            //TODO 检测版本
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -25,7 +26,6 @@ namespace Client
             //tbxLocalPort.Enabled = false;
 
             string serverIP = cbxServerIP.SelectedItem.ToString();
-            int serverPort = Convert.ToInt32(Convert.ToInt32(tbxServerPort.Text));
 
             if (server!=null)
             {
@@ -35,7 +35,7 @@ namespace Client
 
             try
             {
-                server = new RemoteClient(serverIP, serverPort);
+                server = new RemoteClient(serverIP);
                 server.GetPortEvent += SetNewPort;//绑定回调事件
                 MessageBox.Show("连接成功，请点击获取端口", "成功");
 
@@ -100,9 +100,18 @@ namespace Client
             if (tbxProxyAddress.Text!="")
             {
                 tbxProxyAddress.Copy();
-                //Clipboard.SetDataObject(tbxProxyAddress.Text, true, 2, 100);
                 MessageBox.Show("复制成功！", "成功");
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //启动游戏
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //修改游戏路径
         }
     }
 }
