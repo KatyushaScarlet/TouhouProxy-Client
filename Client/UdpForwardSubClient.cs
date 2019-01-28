@@ -21,7 +21,7 @@ namespace Client
 
         public UdpForwardSubClient(int index)
         {
-            udpClient = new UdpClient();
+            udpClient = new UdpClient(0);
             //解决UDP报错问题，详见 https://www.cnblogs.com/pasoraku/p/5612105.html
             //在linux上无此问题
             uint IOC_IN = 0x80000000;

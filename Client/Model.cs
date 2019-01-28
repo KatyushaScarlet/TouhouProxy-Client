@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Client
@@ -47,6 +49,14 @@ namespace Client
         {
             Random random = new Random(Guid.NewGuid().ToString("N").GetHashCode());
             return random.Next(min, max);
+        }
+
+        public static byte[] ByteSplice(byte[] bytes1,byte[] bytes2)//byte[]拼接
+        {
+            List<byte> list1 = bytes1.ToList();
+            list1.AddRange(bytes2);
+            byte[] result = list1.ToArray();
+            return result;
         }
 
         //static string GetIP()//获取本机IP

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Linq;
+using System.Text;
 
 namespace Client
 {
@@ -65,7 +67,7 @@ namespace Client
                 {
                     //获取到达用户的id
                     int index = int.Parse(messageArrive[1]);
-                    byte[] message = Model.Encode(messageArrive[2]);
+                    byte[] message =Encoding.UTF8.GetBytes(messageArrive[2]);
 
                     if (clientList.ContainsKey(index))
                     {
@@ -99,7 +101,7 @@ namespace Client
         private void ReceiveMessag(int index, byte[] buffer)
         {
             //接收本地UdpClient的回传数据，并转发至服务端
-            byte[] message = Model.Encode(Model.Game_Data_Forward, index, buffer);
+            byte[] message = Model.ByteSplice(Model.Encode(Model.Game_Data_Forward, index), buffer);
             mainUdpClient.Send(message, message.Length, serverEndPoint);
 
         }
@@ -114,7 +116,7 @@ namespace Client
                     mainUdpClient.Send(Model.Heartbeat, Model.Heartbeat.Length, serverEndPoint);
                 }
                 //循环发送
-                Thread.Sleep(1000);
+                Thread.Sleep(10000);
             }
         }
 
