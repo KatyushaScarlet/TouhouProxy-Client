@@ -51,12 +51,22 @@ namespace Client
             return random.Next(min, max);
         }
 
-        public static byte[] ByteSplice(byte[] bytes1,byte[] bytes2)//byte[]拼接
+        public static byte[] ByteSplice(byte[] bytes1, byte[] bytes2)//byte[]拼接
         {
-            List<byte> list1 = bytes1.ToList();
+            List<byte> list1 = new List<byte>();
+            list1.AddRange(bytes1);
             list1.AddRange(bytes2);
             byte[] result = list1.ToArray();
             return result;
+        }
+
+        public static byte[] ByteSplit(byte[] bytes, int skip)//byte[]截取
+        {
+            List<byte> input = new List<byte>();
+            List<byte> output = new List<byte>();
+            input.AddRange(bytes);
+            output.AddRange(input.Skip(skip));
+            return output.ToArray();
         }
 
         //static string GetIP()//获取本机IP

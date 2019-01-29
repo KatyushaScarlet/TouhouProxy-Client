@@ -67,7 +67,8 @@ namespace Client
                 {
                     //获取到达用户的id
                     int index = int.Parse(messageArrive[1]);
-                    byte[] message =Encoding.UTF8.GetBytes(messageArrive[2]);
+                    //byte[] message = Encoding.UTF8.GetBytes(messageArrive[2]);//TODO 根据位数直接截取buffer
+                    byte[] message = Model.ByteSplit(buffer, 9);//直接截取buffer位置
 
                     if (clientList.ContainsKey(index))
                     {
@@ -101,7 +102,7 @@ namespace Client
         private void ReceiveMessag(int index, byte[] buffer)
         {
             //接收本地UdpClient的回传数据，并转发至服务端
-            byte[] message = Model.ByteSplice(Model.Encode(Model.Game_Data_Forward, index), buffer);
+            byte[] message = Model.ByteSplice(Model.Encode(Model.Game_Data_Forward, string.Format("{0:0000}", index)), buffer);//序号格式化为4位，在后方带上buffer
             mainUdpClient.Send(message, message.Length, serverEndPoint);
 
         }
