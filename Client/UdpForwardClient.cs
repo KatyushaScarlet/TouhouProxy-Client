@@ -117,7 +117,7 @@ namespace Client
                     mainUdpClient.Send(Model.Heartbeat, Model.Heartbeat.Length, serverEndPoint);
                 }
                 //循环发送
-                Thread.Sleep(10000);
+                Thread.Sleep(1000);
             }
         }
 

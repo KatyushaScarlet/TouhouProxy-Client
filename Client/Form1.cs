@@ -94,7 +94,7 @@ namespace Client
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://touhou.su");
+            Process.Start("https://jq.qq.com/?_wv=1027&k=5Gdv5PQ");
         }
 
         private void tbxProxyAddress_DoubleClick(object sender, EventArgs e)
