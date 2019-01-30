@@ -60,6 +60,7 @@
     <Compile Include="RemoteClient.cs" />
     <Compile Include="UdpForwardClient.cs" />
     <Compile Include="UdpForwardSubClient.cs" />
+    <Compile Include="XMLConfig.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
