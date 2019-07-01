@@ -142,5 +142,10 @@ namespace Client
                 MessageBox.Show("配置文件读取失败，请重新启动", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/KatyushaScarlet/TouhouProxy-Client/releases");
+        }
     }
 }

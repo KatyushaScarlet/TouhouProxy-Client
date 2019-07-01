@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
 
 namespace Client
 {
@@ -67,6 +68,41 @@ namespace Client
             input.AddRange(bytes);
             output.AddRange(input.Skip(skip));
             return output.ToArray();
+        }
+
+        //IP地址转Byte
+        static byte[] IP2Byte(IPEndPoint ip)
+        {
+            byte[] output = new byte[6];
+            //处理ip
+            for (int i = 0; i < 4; i++)
+            {
+                output[i] = ip.Address.GetAddressBytes()[i];
+            }
+            //处理端口号
+            byte[] port = BitConverter.GetBytes(ip.Port);
+            for (int i = 0; i < 2; i++)
+            {
+                output[i + 4] = port[i];
+            }
+
+            return output;
+        }
+
+        //Byte转IP地址
+        static IPEndPoint Byte2IP(byte[] ip)
+        {
+            //处理ip
+            int[] address = new int[4];
+            for (int i = 0; i < 4; i++)
+            {
+                address[i] = Convert.ToUInt16(ip[i]);
+            }
+            //处理端口号
+            int port = BitConverter.ToUInt16(ip, 4);
+
+            IPEndPoint output = new IPEndPoint(IPAddress.Parse(string.Format("{0}.{1}.{2}.{3}", address[0], address[1], address[2], address[3])), port);
+            return output;
         }
 
         //static string GetIP()//获取本机IP
