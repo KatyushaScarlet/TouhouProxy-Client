@@ -2,6 +2,8 @@
 
 ## 原理图
 
+![picture1](https://github.com/KatyushaScarlet/TouhouProxy-Client/raw/master/README/picture1.png)
+
 
 
 ## 使用步骤
