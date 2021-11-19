@@ -1,10 +1,8 @@
 # Touhou Proxy 东方对战工具
 
-## 原理图
+## 程序界面
 
-![picture1](https://github.com/KatyushaScarlet/TouhouProxy-Client/raw/master/README/picture1.png)
-
-
+![picture2](https://github.com/KatyushaScarlet/TouhouProxy-Client/blob/master/README/picture2.png)
 
 ## 使用步骤
 
@@ -28,8 +26,12 @@ A：请尝试再次获取端口
 
 Q：为什么无法观战？
 
-A：十分抱歉，功能暂未实现，后续会继续更新
+A：功能暂未实现，后续会继续更新
 
 Q：在XXXX环境下无法使用？
 
 A：请联系我
+
+## 原理图
+
+![picture1](https://github.com/KatyushaScarlet/TouhouProxy-Client/raw/master/README/picture1.png)
