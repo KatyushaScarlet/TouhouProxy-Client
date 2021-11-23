@@ -35,3 +35,7 @@ A：请联系我
 ## 原理图
 
 ![picture1](https://github.com/KatyushaScarlet/TouhouProxy-Client/raw/master/README/picture1.png)
+
+## 服务端
+
+[TouhouProxy-ServerCore](https://github.com/KatyushaScarlet/TouhouProxy-ServerCore)
